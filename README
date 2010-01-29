@@ -1,0 +1,20 @@
+How to Run
+	* Edit the script to reflect your account and other settings.
+	* Install the nesseary gems (tmail)
+	
+Things you should know about
+
+    * This was tested on ruby 1.8.7 (2009-06-12 patchlevel 174)
+    * You need tmail -> gem install tmail
+    * Your Gmail account should be IMAP enabled (more info).
+    * The script will first go through all the mails with some label applied on them. And it will download the attachments on these mails one by one. After it have processed one email, it will put on another label on it, to signify that this message’s attachments have been downloaded. So you could continue this script from where it stopped, if the script crashes out in the middle of the process.
+    * I first tried doing this using ruby-gmail gem, but for some reason it fails to detect the attachments. But this may be fixed when you are reading this post. So if you want a more simpler script with more gmail oriented functionalities have a look at that project.
+    * Whatever you do, do not violate Gmail’s ToS.
+
+Issues
+
+    * This process emails one by one, it is not multi threaded. And it will take sometime. So be patient and let it do its job.
+    * When a certain email is processed and its attachments are downloaded the script will attach a label to it. This might/might not remove the existing labels from that email. If it does not remove them, you will need to do so manually, if and when you are starting the script to resume its work from where it stopped last time.
+    * The script doesn’t know about (gmail) threads, it processes individual emails.
+
+http://thekindofme.wordpress.com/2010/01/29/gmail-attachment-downloader-script/
