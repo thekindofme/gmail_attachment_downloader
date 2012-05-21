@@ -1,11 +1,11 @@
 How to Run
 	* Edit the script to reflect your account and other settings.
-	* Install the nesseary gems (tmail)
+	* Install the necessary gems (mail)
 	
 Things you should know about
 
-    * This was tested on ruby 1.8.7 (2009-06-12 patchlevel 174)
-    * You need tmail -> gem install tmail
+    * This was tested on ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin12.0.0]
+    * You need mail gem -> gem install mail
     * Your Gmail account should be IMAP enabled (more info).
     * The script will first go through all the mails with some label applied on them. And it will download the attachments on these mails one by one. After it have processed one email, it will put on another label on it, to signify that this message’s attachments have been downloaded. So you could continue this script from where it stopped, if the script crashes out in the middle of the process.
     * I first tried doing this using ruby-gmail gem, but for some reason it fails to detect the attachments. But this may be fixed when you are reading this post. So if you want a more simpler script with more gmail oriented functionalities have a look at that project.
