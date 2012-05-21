@@ -1,5 +1,6 @@
 #! /usr/bin/ruby
-#This script is baised on http://snippets.dzone.com/posts/show/7530
+#This script is based on http://snippets.dzone.com/posts/show/7530
+#updated to use mail gem instead of tmail
 
 username = "username@gmail.com"
 password = "pa$sword"
@@ -9,7 +10,7 @@ save_to_folder = "/path/to/folder/where/attachments/will/be/saved"
 
 require 'net/imap'
 require 'rubygems'
-require 'tmail'
+require 'mail'
 
 # This is a convenience monkey patch
 class Net::IMAP
@@ -33,14 +34,14 @@ puts "Found #{mails.count} mail(s) in folder '#{look_in_folder}'"
 puts "\nFetching the next email (this might take some time depending on the size of the message/attachment..."
 mails.each do |uid|
   # save_attachment
-  mail = TMail::Mail.parse( imap.uid_fetch(uid, 'RFC822').first.attr['RFC822'] )
+  mail = Mail.new( imap.uid_fetch(uid, 'RFC822').first.attr['RFC822'] )
   puts "Processing '#{mail.subject}'"
   if ! mail.attachments.blank?
     puts "Detected #{mail.attachments.count} attachment(s)"
     mail.attachments.each {|attachment|
-      puts "Saving attachment to '#{attachment.original_filename}'..."
-      File.open(save_to_folder + attachment.original_filename,"w+") { |local_file|
-        local_file << attachment.gets(nil)
+      puts "Saving attachment to '#{attachment.filename}'..."
+      File.open(save_to_folder + attachment.filename,"w+", 0644) { |local_file|
+        local_file.write attachment.body.decoded
       }
     }
 
